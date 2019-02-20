@@ -74,6 +74,22 @@ softserver.put('/users/:id', async (rec, rez) => {
     }
 })
 
+softserver.get('/users/:id/posts', async (rec, rez) => {
+    try {
+        var Pompom = await userDB.getUserPosts(rec.params.id);
+        if (Pompom) {
+            rez.status(200).json({ Pompom, successIt: "Heyo Captain Jack"})
+        }
+        else {
+            rez.status(404).json({rando2: "No Ring Here. Only Golum"});
+        }
+    }
+    catch {
+        rez.status(500).json({ mess:'You Fool of a Took !!!'})
+    };
+
+})
+
 
 
 
