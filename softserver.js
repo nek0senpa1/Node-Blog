@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const userDB = require('./data/helpers/userDb');
+const postDB = require('./data/helpers/postDb');
 
 const softserver = express();
 
@@ -15,7 +16,7 @@ softserver.get('/', (req,res) => {
         <h2>Look How Far We've Come Together</h2>`);
 });
 
-// USERS ENDP's
+//----- USERS ENDP's
 softserver.get('/users', async (reck, rez) => {
     try{
         const thing = await userDB.get(reck.query);
@@ -58,10 +59,10 @@ softserver.delete('/users/:id', async (rec, rex) => {
 
 })
 
-softserver.put('/users/id', async (rec, rez) => {
+softserver.put('/users/:id', async (rec, rez) => {
     try {
-        let killWho = await userDB.update(rec.params.id, rec.body);
-        if (killWho) {
+        let tom = await userDB.update(rec.params.id, rec.body);
+        if (tom) {
             rez.status(200).json({rando: "Updated the Elven Language"});
         }
         else {
@@ -72,6 +73,71 @@ softserver.put('/users/id', async (rec, rez) => {
         rez.status(500).json({ mess:'You Fool of a Took !!!'})
     }
 })
+
+
+
+
+
+
+//-----POST ENDPs here...
+
+softserver.get('/posts', async (reck, rez) => {
+    try{
+        const thing = await postDB.get(reck.query);
+        rez.status(200).json(thing);
+    }
+    catch (errerz) {
+        console.log(errerz);
+        rez.status(500).json({
+            disIssaMessage: "You ain\n't got nothin... ",
+        })
+    }
+});
+
+
+softserver.post('/posts', async (rec, rez) => {
+    try{
+        const widget = await postDB.insert(rec.body);
+        rez.status(201).json(widget)
+    }
+    catch{
+        rez.status(500).json({ mess:'You Fool of a Took !!!'})
+    }
+});
+
+softserver.delete('/posts/:id', async (rec, rex) => {
+    try {
+        var something = await postDB.remove(rec.params.id);
+        if (something) {
+            console.log(something);
+            rex.status(200).json({ randomtext: 'Balrog is dead,yo!'});
+        } 
+        else {
+            console.log(something);
+            rex.status(404).json({ morerandomtext: 'No Balrog here...'});
+        }
+        }
+        catch{
+            rez.status(500).json({ mess:'You Fool of a Took !!!'})
+        } 
+
+})
+
+softserver.put('/posts/:id', async (rec, rez) => {
+    try {
+        let tom = await postDB.update(rec.params.id, rec.body);
+        if (tom) {
+            rez.status(200).json({rando: "Updated the Elven Language"});
+        }
+        else {
+            rez.status(404).json({rando2: "No Ring Here. Only Golum"});
+        }
+    }
+    catch{
+        rez.status(500).json({ mess:'You Fool of a Took !!!'})
+    }
+})
+
 
 //GONNA STUFF MY FUNCTIONS HERE...
 
