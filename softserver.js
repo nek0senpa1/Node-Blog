@@ -10,7 +10,7 @@ softserver.use(express.json());
 softserver.use(helmet());
 
 
-softserver.use(upperCheck());
+//softserver.use(upperCheck());
 
 // GONNA STUFF MY ENDPOINTS HERE...
 softserver.get('/', (req,res) => {
@@ -33,7 +33,7 @@ softserver.get('/users', async (reck, rez) => {
 });
 
 
-softserver.post('/users', async (rec, rez) => {
+softserver.post('/users', uppyCheck, async (rec, rez) => {
     try{
         const widget = await userDB.insert(rec.body);
         rez.status(201).json(widget)
@@ -61,7 +61,7 @@ softserver.delete('/users/:id', async (rec, rex) => {
 
 })
 
-softserver.put('/users/:id', async (rec, rez) => {
+softserver.put('/users/:id', uppyCheck, async (rec, rez) => {
     try {
         let tom = await userDB.update(rec.params.id, rec.body);
         if (tom) {
@@ -160,18 +160,28 @@ softserver.put('/posts/:id', async (rec, rez) => {
 //GONNA STUFF MY FUNCTIONS HERE...
 
 
-function upperCheck ()  {
-    return function(req, res, next) {
-      let uName = req.headers.name;
+// function upperCheck ()  {
+//     return function(req, res, next) {
+//       let uName = req.headers.name;
         
-      if (uName.toUpperCase() === uName) {
-        next();
-      } else {
-        res.status(403).json('Oh Noeseseseses!')
-      }
+//       if (uName.toUpperCase() === uName) {
+//         next();
+//       } else {
+//         res.status(403).json('Oh Noeseseseses!')
+//       }
       
+//     }
+//   }
+
+function uppyCheck(rec, rez, getToIt) {
+    let upName = rec.body.name;
+    if(upName.toUpperCase() === upName ) {
+        getToIt();
     }
-  }
+    else {
+        rez.status(403).json('Nah, Dog, that name gotta be Capitalized')
+    }
+}
 
 
 module.exports = softserver;
