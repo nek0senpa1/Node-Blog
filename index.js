@@ -1,6 +1,11 @@
-// code away!
+require('dotenv').config();
+
+
 const server = require ('./softserver.js');
 
-server.listen(9000, ( ) => {
-    console.log("Heyo Captain Jack, Checking Stuff on the 9000 Rack!")
+
+const portyPort = process.env.PORT || 5000;
+
+server.listen(portyPort, ( ) => {
+    console.log(`Heyo Captain Jack, Checking Stuff on the ${portyPort} Rack!`)
 })
