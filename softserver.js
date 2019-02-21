@@ -14,8 +14,23 @@ softserver.use(helmet());
 
 // GONNA STUFF MY ENDPOINTS HERE...
 softserver.get('/', (req,res) => {
-    res.send(`<h2>Looks like you made it</h2>
-        <h2>Look How Far We've Come Together</h2>`);
+    res.send(`<h3>Chip the glasses and crack the plates!</h3>
+        <h3>Blunt the knives and bend the forks!</h3>
+        <h3>That's what Bilbo Baggins hates-</h3>
+        <h3>Smash the bottles and burn the corks!</h3>
+        <h3>Cut the cloth and tread on the fat!</h3>
+        <h3>Pour the milk on the pantry floor!</h3>
+        <h3>Leave the bones on the bedroom mat!</h3>
+        <h3>Splash the wine on every door!</h3>
+        <h3>Dump the crocks in a boiling bowl;</h3>
+        <h3>Pound them up with a thumping pole;</h3>
+        <h3>And when you've finished, if any are whole,</h3>
+        <h3>Send them down the hall to roll!</h3>
+        <h3>That's what Bilbo Baggins hates!</h3>
+        <h3>So, carefully! carefully with the plates!</h3>
+        
+        <h3>https://www.youtube.com/watch?v=3gv1qnPAiSI</h3>
+        `);
 });
 
 //----- USERS ENDP's
