@@ -10,7 +10,7 @@ softserver.use(express.json());
 softserver.use(helmet());
 
 
-softserver.use(upperCheck('TOM'));
+softserver.use(upperCheck());
 
 // GONNA STUFF MY ENDPOINTS HERE...
 softserver.get('/', (req,res) => {
@@ -160,11 +160,11 @@ softserver.put('/posts/:id', async (rec, rez) => {
 //GONNA STUFF MY FUNCTIONS HERE...
 
 
-function upperCheck (name)  {
+function upperCheck ()  {
     return function(req, res, next) {
-      const uName = req.headers.name;
+      let uName = req.headers.name;
         
-      if (uName.toUpperCase() === name) {
+      if (uName.toUpperCase() === uName) {
         next();
       } else {
         res.status(403).json('Oh Noeseseseses!')
